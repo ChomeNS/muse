@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<<<<<<< HEAD
 ## [2.10.1] - 2025-01-28
 - Remove Spotify requirement
 - Dependency update
@@ -19,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.9.5] - 2024-10-29
 - Dependency update
 - Pull request #1040 merged (Used incorrect PR number, apoligies)
+=======
+## [69.2.9.5] - 2024-10-11
+
+### Added
+- Nightcore support via `/nightcore`
+>>>>>>> 0c883aa (Update CHANGELOG.md)
 
 ## [2.9.4] - 2024-08-28
 
