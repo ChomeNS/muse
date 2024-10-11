@@ -4,25 +4,14 @@ on:
   push:
     tags:
     - 'v*'
+  workflow_dispatch:
 
 env:
   REGISTRY_IMAGE: chayapak1/muse
 
 jobs:
   publish:
-    strategy:
-      matrix:
-        runner-platform:
-          - ubuntu-latest
-          - namespace-profile-default-arm64
-        include:
-          - runner-platform: ubuntu-latest
-            build-arch: linux/amd64
-            tagged-platform: amd64
-          - runner-platform: namespace-profile-default-arm64
-            build-arch: linux/arm64
-            tagged-platform: arm64
-    runs-on: ${{ matrix.runner-platform }}
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -55,8 +44,8 @@ jobs:
         with:
           push: true
           tags: |
-            ${{ env.REGISTRY_IMAGE }}:${{ github.sha }}-${{ matrix.tagged-platform }}
-          platforms: ${{ matrix.build-arch }}
+            ${{ env.REGISTRY_IMAGE }}:${{ github.sha }}-amd64
+          platforms: linux/amd64
           build-args: |
             COMMIT_HASH=${{ github.sha }}
             BUILD_DATE=${{ steps.current-time.outputs.time }}
