@@ -75,6 +75,7 @@ export default class {
   private audioResource: AudioResource | null = null;
   private volume?: number;
   private defaultVolume: number = DEFAULT_VOLUME;
+  private nightcoreEnabled: boolean = false;
   private nowPlaying: QueuedSong | null = null;
   private playPositionInterval: NodeJS.Timeout | undefined;
   private lastSongURL = '';
@@ -490,6 +491,10 @@ export default class {
     return this.volume ?? this.defaultVolume;
   }
 
+  setNightcore(enabled: boolean): void {
+    this.nightcoreEnabled = enabled
+  }
+
   private getHashForCache(url: string): string {
     return hasha(url);
   }
@@ -588,6 +593,7 @@ export default class {
       cacheKey: song.url,
       ffmpegInputOptions,
       cache: shouldCacheVideo,
+      rate: format?.audioSampleRate,
       volumeAdjustment: format?.loudnessDb ? `${-format.loudnessDb}dB` : undefined,
     });
   }
@@ -665,7 +671,7 @@ export default class {
     }
   }
 
-  private async createReadStream(options: {url: string; cacheKey: string; ffmpegInputOptions?: string[]; cache?: boolean; volumeAdjustment?: string}): Promise<Readable> {
+  private async createReadStream(options: {url: string; cacheKey: string; ffmpegInputOptions?: string[]; cache?: boolean; volumeAdjustment?: string, rate?: string}): Promise<Readable> {
     return new Promise((resolve, reject) => {
       const capacitor = new WriteStream();
 
@@ -682,7 +688,7 @@ export default class {
         .noVideo()
         .audioCodec('libopus')
         .outputFormat('webm')
-        .addOutputOption(['-filter:a', `volume=${options?.volumeAdjustment ?? '1'}`])
+        .addOutputOption(['-filter:a', `volume=${options?.volumeAdjustment ?? '1'}${this.nightcoreEnabled ? `,atempo=1.04,asetrate=${options?.rate ?? 48000}*1.08` : ''}`])
         .on('error', error => {
           if (!hasReturnedStreamClosed) {
             reject(error);

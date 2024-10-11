@@ -25,6 +25,7 @@ import LoopQueue from './commands/loop-queue.js';
 import Loop from './commands/loop.js';
 import Move from './commands/move.js';
 import Next from './commands/next.js';
+import Nightcore from './commands/nightcore.js'
 import NowPlaying from './commands/now-playing.js';
 import Pause from './commands/pause.js';
 import Play from './commands/play.js';
@@ -83,6 +84,7 @@ if (config.SPOTIFY_CLIENT_ID !== '' && config.SPOTIFY_CLIENT_SECRET !== '') {
   Loop,
   Move,
   Next,
+  Nightcore,
   NowPlaying,
   Pause,
   Play,
