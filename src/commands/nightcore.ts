@@ -11,8 +11,8 @@ export default class implements Command {
     .setName('nightcore')
     .setDescription('nightcoreifies the songs')
     .addBooleanOption(option => option
-        .setName('enabled')
-        .setDescription('just enabled'));
+      .setName('enabled')
+      .setDescription('just enabled'));
 
   public requiresVC = true;
 
@@ -23,7 +23,7 @@ export default class implements Command {
   }
 
   public async execute(interaction: ChatInputCommandInteraction) {
-    this.playerManager.get(interaction.guild!.id).setNightcore(interaction.options.getBoolean('enabled') ?? false)
+    this.playerManager.get(interaction.guild!.id).setNightcore(interaction.options.getBoolean('enabled') ?? false);
 
     await interaction.reply('nightcore enabled');
   }

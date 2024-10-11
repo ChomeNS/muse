@@ -75,7 +75,7 @@ export default class {
   private audioResource: AudioResource | null = null;
   private volume?: number;
   private defaultVolume: number = DEFAULT_VOLUME;
-  private nightcoreEnabled: boolean = false;
+  private nightcoreEnabled = false;
   private nowPlaying: QueuedSong | null = null;
   private playPositionInterval: NodeJS.Timeout | undefined;
   private lastSongURL = '';
@@ -492,7 +492,7 @@ export default class {
   }
 
   setNightcore(enabled: boolean): void {
-    this.nightcoreEnabled = enabled
+    this.nightcoreEnabled = enabled;
   }
 
   private getHashForCache(url: string): string {
@@ -671,7 +671,7 @@ export default class {
     }
   }
 
-  private async createReadStream(options: {url: string; cacheKey: string; ffmpegInputOptions?: string[]; cache?: boolean; volumeAdjustment?: string, rate?: string}): Promise<Readable> {
+  private async createReadStream(options: {url: string; cacheKey: string; ffmpegInputOptions?: string[]; cache?: boolean; volumeAdjustment?: string; rate?: string}): Promise<Readable> {
     return new Promise((resolve, reject) => {
       const capacitor = new WriteStream();
 
