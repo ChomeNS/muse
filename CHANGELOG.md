@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [69.2.9.5] - 2024-10-11
+
+### Added
+- Nightcore support via `/nightcore`
+
 ## [2.9.4] - 2024-08-28
 
 ### Added 
