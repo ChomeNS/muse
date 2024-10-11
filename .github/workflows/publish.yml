@@ -91,7 +91,7 @@ jobs:
       #     docker_image: ${{ env.REGISTRY_IMAGE }}
 
       - name: Combine tags (Docker Hub)
-        run: docker buildx imagetools create $(echo '${{ steps.get-tags-dockerhub.outputs.tag }}' | tr "," "\0" | xargs -0 printf -- '-t %s ') 'chayapak1/muse:${{ github.sha }}-arm64' 'chayapak1/muse:${{ github.sha }}-amd64'
+        run: docker buildx imagetools create $(echo '${{ steps.get-tags-dockerhub.outputs.tag }}' | tr "," "\0" | xargs -0 printf -- '-t %s ') 'chayapak1/muse:${{ github.sha }}-amd64'
 
       # - name: Combine tags (GitHub Container Registry)
       #   run: docker buildx imagetools create $(echo '${{ steps.get-tags-ghcr.outputs.tag }}' | tr "," "\0" | xargs -0 printf -- '-t %s ') '${{ env.REGISTRY_IMAGE }}:${{ github.sha }}-arm64' '${{ env.REGISTRY_IMAGE }}:${{ github.sha }}-amd64'
